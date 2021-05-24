@@ -14,30 +14,28 @@ function initRandomArray(array){
 initRandomArray(data);
 
 // 그래프 생성
-var width = 400,
-    leftMargin = 100,
-    topMargin = 30,
-    barHeight = 20,
+var height = 600,
+    leftMargin = 50,
+    topMargin = 20,
+    barWidth = 20,
     barGap = 5,
     tickGap = 5,
     tickHeight = 10,
-    scaleFactor = width / 100,
-    barSpacing = barHeight + barGap,
-    translateText = "translate(" + leftMargin + "," + topMargin + ")",
-    scaleText = "scale(" + scaleFactor + ",1)";
+    scaleFactor = height / 100,
+    barSpacing = barWidth + barGap,
+    scaleText = "scale(1," + scaleFactor + ")";
 
 var body = d3.select("body");
 body.append("h2").text("Sorting Algorithms");
 body.append("div").attr("class", "clearfix")
 var svg = body.append("svg");
 var barGroup = svg.append("g")
-    .attr("transform", translateText + " " + scaleText)
     .attr("class", "bar");
 for(var i = 0; i < data.length; i++){
   barGroup.append("rect")
-      .attr("x", 0)
-      .attr("y", i * barSpacing)
-      .attr("height", barHeight)
-      .attr("width", data[i]);
+      .attr("x", i * barSpacing)
+      .attr("y", 0)
+      .attr("height", data[i])
+      .attr("width", barWidth);
 };
 
