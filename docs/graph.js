@@ -1,63 +1,60 @@
 // 랜덤하게 섞인 배열 생성
-var arrSize = 0;
 var data = [];
+var arrSize = 0;
+arrSize = 50;
+for(let i = 0; i < arrSize; i++){
+		data[i] = i + 1;
+}
 
 function initRandomArray(array){
-  for(var i = array.length - 1 ; i > 0 ; i--){
-    var j = Math.floor(Math.random() * (i + 1) ); 
-    [array[i], array[j]]=[array[j], array[i]];
-  }
-}
-
-function fontSize() {
-  return String((115 - arrSize) * 0.18 + 5) + "px";
-}
-
-function set(){
-    arrSize = document.getElementById("value").value;
-
-    for(let i = 0; i < arrSize; i++){
-        data[i] = i + 1;
+    for(var i = array.length - 1 ; i > 0 ; i--){
+        var j = Math.floor(Math.random() * (i + 1) ); 
+        [array[i], array[j]]=[array[j], array[i]];
     }
-
-    initRandomArray(data);
-       
-    // 그래프 생성
-    var margin = { top: 30, right: 30, left: 30, bottom: 20 };
-    var width = 1500;
-    var height = 700;
-
-    var x = d3.scaleBand()
-        .domain(data.map(d => d))
-        .range([margin.left, width - margin.right])
-        .padding(0.2);
-
-    var y = d3.scaleLinear()
-        .domain([0, d3.max(data, d => d)]).nice()
-        .range([height - margin.bottom, margin.top]);
-
-    var svg = d3.select('body').append('svg').style('width', width).style('height', height);
-
-    svg.append('g')
-        .selectAll('rect').data(data).enter().append('rect')
-        .attr('x', d => x(d))
-        .attr('y', d => y(d))
-        .attr('height', d => y(0) - y(d))
-        .attr('width', x.bandwidth())
-        .attr('rx', 3)
-        .attr('fill', '#87CEFA');
-
-    svg.selectAll("text")
-        .data(data)
-        .enter().append("text")
-        .text(function(d) {return d})
-            .attr("x", d => x(d) + (100 - arrSize) * 0.05)
-            .attr("y", d => y(d) + (110 - arrSize) * 0.2 + 10)
-            .attr("font-size", fontSize())
-            .attr('fill', '#FFFFFF');
-
-    svg.node();
 }
+
+initRandomArray(data);
+
+// 그래프 생성
+var margin = { top: 30, right: 30, left: 30, bottom: 20 };
+var width = 1500;
+var height = 700;
+
+var x = d3.scaleBand()
+		.domain(data.map(d => d))
+    .range([margin.left, width - margin.right])
+    .padding(0.2);
+
+var y = d3.scaleLinear()
+		.domain([0, d3.max(data, d => d)]).nice()
+    .range([height - margin.bottom, margin.top]);
+
+      
+function fontSize() {
+	return String((115 - arrSize) * 0.18 + 5) + "px";
+}
+
+var svg = d3.select('body').append('svg').style('width', width).style('height', height);
+
+svg.append('g')
+		.selectAll('rect').data(data).enter().append('rect')
+    .attr('x', d => x(d))
+    .attr('y', d => y(d))
+    .attr('height', d => y(0) - y(d))
+    .attr('width', x.bandwidth())
+    .attr('rx', 3)
+    .attr('fill', '#87CEFA');
+
+svg.selectAll("text")
+    .data(data)
+    .enter().append("text")
+    .text(function(d) {return d})
+        .attr("x", d => x(d) + (100 - arrSize) * 0.05)
+        .attr("y", d => y(d) + (110 - arrSize) * 0.2 + 10)
+        .attr("font-size", fontSize())
+        .attr('fill', '#FFFFFF');
+
+svg.node();
 
 // redraw 함수 정의
 function redraw(newData) {
@@ -154,12 +151,3 @@ bubbleSort(data);
 d3.select("#insertion_btn").on("click", function() {
 insertionSort(data);
 })
-
-d3.select("#merge_btn").on("click", function() {
-mergeSort(data);
-})
-
-d3.select("#quick_btn").on("click", function() {
-quick_sort(data);
-})
-
