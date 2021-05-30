@@ -1,7 +1,6 @@
 // 랜덤하게 섞인 배열 생성
 var data = [];
-var arrSize = 0;
-arrSize = 50;
+var arrSize = 50;
 for(let i = 0; i < arrSize; i++){
 		data[i] = i + 1;
 }
