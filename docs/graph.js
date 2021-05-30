@@ -2,18 +2,22 @@
 var arrSize = 0;
 var data = [];
 
+function initRandomArray(array){
+  for(var i = array.length - 1 ; i > 0 ; i--){
+    var j = Math.floor(Math.random() * (i + 1) ); 
+    [array[i], array[j]]=[array[j], array[i]];
+  }
+}
+
+function fontSize() {
+  return String((115 - arrSize) * 0.18 + 5) + "px";
+}
+
 function set(){
     arrSize = document.getElementById("value").value;
 
     for(let i = 0; i < arrSize; i++){
         data[i] = i + 1;
-    }
-
-    function initRandomArray(array){
-        for(var i = array.length - 1 ; i > 0 ; i--){
-            var j = Math.floor(Math.random() * (i + 1) ); 
-            [array[i], array[j]]=[array[j], array[i]];
-        }
     }
 
     initRandomArray(data);
@@ -31,11 +35,6 @@ function set(){
     var y = d3.scaleLinear()
         .domain([0, d3.max(data, d => d)]).nice()
         .range([height - margin.bottom, margin.top]);
-
-
-    function fontSize() {
-      return String((115 - arrSize) * 0.18 + 5) + "px";
-    }
 
     var svg = d3.select('body').append('svg').style('width', width).style('height', height);
 
