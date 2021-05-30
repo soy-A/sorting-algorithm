@@ -15,20 +15,29 @@
 	.clearfix {
 	    clear: both;
 	}
-	.bar {
-	    fill: SkyBlue;
-	}
     </style>
   </head>
   <body>
+    <h3>Sorting Algorithms Visualization - 201812755 민소연</h3>
     <script src="https://d3js.org/d3.v5.min.js"></script>
+    <table>
+      <tr>
+          <td>
+              데이터의 크기 입력
+          </td>
+          <td>
+              <input type="text" id="value">
+          </td>
+          <td>
+              <button onclick="set()">set</button>
+          </td>
+      </tr>
+    </table>
     <input type="button" id="reset_btn" value="reset">
     <input type="button" id="selection_btn" value="selection sort">
     <input type="button" id="bubble_btn" value="bubble sort">
     <input type="button" id="insertion_btn" value="insertion sort">
-    <input type="button" id="merge_btn" value="merge sort">
-    <input type="button" id="quick_btn" value="quick sort">
+    <h5>Steps: <span id="counter">0</span></h5>
     <script src="graph.js"></script>
-    <div>Steps: <span id="counter">0</span></div>
   </body>
 </html>
